@@ -18,6 +18,6 @@ mongoose.connect(mongoURI)
   });
 
 server.listen({ port: 4000 }).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀 Server is ready at ${url}`);
 });
 

@@ -1,4 +1,5 @@
-import Product, { IProduct } from '../models/product';
+import Product from '../models/product/product.model.';
+import { IProduct } from '../models/product/product.types';
 
 interface ProductArgs {
     id: string;

@@ -1,5 +1,5 @@
 import { resolvers } from '../../src/graphql/resolvers';
-import Product from '../../src/models/product';
+import Product from '../models/product/product.model.';
 
 jest.mock('../../src/models/product');
 

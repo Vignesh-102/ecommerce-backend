@@ -1,17 +1,17 @@
 import Product from '../../models/product/product.model.';
 import { IProduct } from '../../models/product/product.types';
 
-interface ProductArgs {
+export interface ProductArgs {
     id: string;
 }
 
-interface ProductInput {
+export interface ProductInput {
     name: string;
     price: number;
     category: string;
 }
 
-interface UpdateProductInput {
+export interface UpdateProductInput {
     id: string;
     name?: string;
     price?: number;

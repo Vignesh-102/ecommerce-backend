@@ -1,12 +1,13 @@
 import { gql } from 'graphql-tag';
 
-export const typeDefs = gql`
+export const ProductTypeDefs = gql`
   type Product {
     id: ID!
     name: String!
     price: Float!
-    category: String!
+    category: String
   }
+
 
   input UpdateProductInput {
     id: ID!

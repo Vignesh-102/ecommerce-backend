@@ -1,5 +1,5 @@
-import Product from '../models/product/product.model.';
-import { IProduct } from '../models/product/product.types';
+import Product from '../../models/product/product.model.';
+import { IProduct } from '../../models/product/product.types';
 
 interface ProductArgs {
     id: string;
@@ -18,12 +18,12 @@ interface UpdateProductInput {
     category?: string;
 }
 
-export const resolvers = {
+export const productResolvers = {
     Query: {
         products: async (): Promise<IProduct[]> => await Product.find(),
 
         product: async (_: unknown, { id }: ProductArgs): Promise<IProduct | null> =>
-            await Product.findById(id),
+            await Product.findById(id)
     },
     Mutation: {
         addProduct: async (_: unknown, args: ProductInput): Promise<IProduct> => {

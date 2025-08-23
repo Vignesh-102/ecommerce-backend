@@ -3,14 +3,13 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 
-import { typeDefs } from './graphql/typeDefs';
-import { resolvers } from './graphql/resolvers';
+import { typeDefs, resolvers } from './graphql/schema';
 
-import authRoutes from './routes/auth.routes';
 import { ApolloServer } from '@apollo/server';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { expressMiddleware } from '@as-integrations/express5';
+import authRoutes from './rest/auth/auth.routes';
 
 
 
@@ -26,6 +25,9 @@ const startServer = async () => {
 
     const app = express();
     app.use(express.json());
+    app.use(cors({
+      origin: "http://localhost:5173"
+    }));
 
     // REST routes
     app.use('/api/auth', authRoutes);

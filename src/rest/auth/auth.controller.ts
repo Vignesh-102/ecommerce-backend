@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { UserModel as User } from '../models/user/user.model';
+import { UserModel as User } from '../../models/user/user.model';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -37,7 +37,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.
+    body;
 
     const user = await User.findOne({ email }).select('+password');
     if (!user) {

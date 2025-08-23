@@ -1,5 +1,5 @@
-import { resolvers } from '../../src/graphql/resolvers';
-import Product from '../models/product/product.model.';
+import { productResolvers } from './product.resolvers';
+import Product from '../../models/product/product.model.';
 
 jest.mock('../../src/models/product');
 
@@ -21,7 +21,7 @@ describe('Product Resolvers', () => {
     it('should return all products', async () => {
       mockedProduct.find.mockResolvedValue([sampleProduct]);
 
-      const result = await resolvers.Query.products();
+      const result = await productResolvers.Query.products();
       expect(result).toEqual([sampleProduct]);
       expect(mockedProduct.find).toHaveBeenCalled();
     });
@@ -31,7 +31,7 @@ describe('Product Resolvers', () => {
     it('should return a single product by id', async () => {
       mockedProduct.findById.mockResolvedValue(sampleProduct as any);
 
-      const result = await resolvers.Query.product({}, { id: '1' });
+      const result = await productResolvers.Query.product({}, { id: '1' });
       expect(result).toEqual(sampleProduct);
       expect(mockedProduct.findById).toHaveBeenCalledWith('1');
     });
@@ -44,7 +44,7 @@ describe('Product Resolvers', () => {
               save: saveMock,
           }));
 
-      const result = await resolvers.Mutation.addProduct({}, {
+      const result = await productResolvers.Mutation.addProduct({}, {
         name: 'Test Product',
         price: 100,
         category: 'Books',
@@ -59,7 +59,7 @@ describe('Product Resolvers', () => {
     it('should update and return the updated product', async () => {
       mockedProduct.findByIdAndUpdate.mockResolvedValue(sampleProduct as any);
 
-      const result = await resolvers.Mutation.updateProduct({}, {
+      const result = await productResolvers.Mutation.updateProduct({}, {
         input: { id: '1', price: 150 },
       });
 
@@ -74,7 +74,7 @@ describe('Product Resolvers', () => {
     it('should throw error if product not found', async () => {
       mockedProduct.findByIdAndUpdate.mockResolvedValue(null);
 
-      await expect(resolvers.Mutation.updateProduct({}, {
+      await expect(productResolvers.Mutation.updateProduct({}, {
         input: { id: '1', price: 150 },
       })).rejects.toThrow('Product update failed');
     });
@@ -84,14 +84,14 @@ describe('Product Resolvers', () => {
     it('should return true when product is deleted', async () => {
       mockedProduct.findByIdAndDelete.mockResolvedValue(sampleProduct as any);
 
-      const result = await resolvers.Mutation.deleteProduct({}, { id: '1' });
+      const result = await productResolvers.Mutation.deleteProduct({}, { id: '1' });
       expect(result).toBe(true);
     });
 
     it('should return false when product is not found', async () => {
       mockedProduct.findByIdAndDelete.mockResolvedValue(null);
 
-      const result = await resolvers.Mutation.deleteProduct({}, { id: '1' });
+      const result = await productResolvers.Mutation.deleteProduct({}, { id: '1' });
       expect(result).toBe(false);
     });
   });
